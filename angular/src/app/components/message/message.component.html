@@ -1,0 +1,9 @@
+<button class="btn btn-dark" (click)="getAll()">Get</button>
+<div [hidden]="!processing">
+  <br>
+  <ul>
+    <li *ngFor="let message of messages">
+       {{message}}
+    </li>
+  </ul>
+</div>
