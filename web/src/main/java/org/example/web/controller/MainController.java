@@ -1,19 +1,19 @@
 package org.example.web.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.example.backend.service.MessageService;
 import org.example.backend.service.consumer.ConsumerService;
 import org.example.backend.service.producer.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 
-@Controller
-@RequestMapping("/")
+@RestController
+@RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class MainController {
 
     @Autowired
@@ -24,17 +24,15 @@ public class MainController {
     private ProducerService producerService;
 
     @GetMapping("/send")
-    public String sendMessage(Model model) {
-        producerService.sendStringToActiveMQ(
-                Arrays.asList(messageService.getMessage().toString(),messageService.getMessage().toString())
-        );
-        model.addAttribute("message", "message is on the way to ActiveMQ");
-        return "index";
+    public String sendMessage (Model model) {
+        producerService.sendStringToActiveMQ(Arrays.asList(
+                messageService.convertMessageToStringJSON(),
+                messageService.convertMessageToStringJSON()));
+        return "{\"message\":\"is on the way to queue\"}";
     }
 
     @GetMapping("/get")
-    public String getMessage(Model model) {
-        model.addAttribute("message", consumerService.getStringFromActiveMQ());
-        return "index";
+    public String getMessages (Model model) {
+        return consumerService.getStringFromActiveMQ();
     }
 }

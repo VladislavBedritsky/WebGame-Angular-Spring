@@ -16,6 +16,12 @@
 
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven />
+    <mvc:cors>
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-headers="Content-Type, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Authorization, X-Requested-With, requestId, Correlation-Id"
+                     allowed-methods="GET, PUT, POST, DELETE"/>
+    </mvc:cors>
 
     <context:component-scan base-package="org.example.*"/>
     <context:annotation-config/>

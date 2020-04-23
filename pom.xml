@@ -25,6 +25,8 @@
         <thymeleaf-spring5.version>3.0.9.RELEASE</thymeleaf-spring5.version>
         <activemq-camel.version>5.15.7</activemq-camel.version>
         <env.camel.version>2.25.0</env.camel.version>
+        <org.json.version>20160810</org.json.version>
+        <jackson-databind.version>2.10.1</jackson-databind.version>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-war-plugin.version>2.4</maven-war-plugin.version>
@@ -72,6 +74,16 @@
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>activemq-camel</artifactId>
                 <version>${activemq-camel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${org.json.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${jackson-databind.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

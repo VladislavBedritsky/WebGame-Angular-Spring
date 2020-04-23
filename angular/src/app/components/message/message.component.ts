@@ -20,17 +20,21 @@ export class MessageComponent implements OnInit {
   }
 
   getAll() {
-    this._messageService.sendMessage();
+    this._messageService.sendMessage()
+                    .subscribe(
+                      message => {
+                        console.log(message);
+                      }
+                    );
     this._messageService.getMessages()
                 .subscribe(
                   messages => {
                     this.messages = messages;
-                    console.log(this.messages);
+                    this.processing = true;
+                        console.log(this.messages);
+                        console.log(this.processing);
                   }
                 );
-
-console.log(this.messages);
-    return this.messages;
   }
 
 }

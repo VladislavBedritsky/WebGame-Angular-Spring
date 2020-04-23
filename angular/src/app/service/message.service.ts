@@ -11,11 +11,11 @@ export class MessageService {
 
   constructor(private http: HttpClient) { }
 
-  getMessages (): Observable<Message[]> {
+  getMessages(): Observable<Message[]> {
     return this.http.get<Message[]>("http://localhost:8080/get")
   }
 
-  sendMessage() {
-    this.http.get("http://localhost:8080/send")
+  sendMessage(): Observable<any> {
+    return this.http.get<any>("http://localhost:8080/send")
   }
 }
