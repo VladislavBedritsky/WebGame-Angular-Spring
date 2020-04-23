@@ -1,16 +1,21 @@
 package org.example.web.controller;
 
+import org.example.backend.model.Message;
 import org.example.backend.service.MessageService;
 import org.example.backend.service.consumer.ConsumerService;
 import org.example.backend.service.producer.ProducerService;
+import org.example.web.Intq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -34,5 +39,12 @@ public class MainController {
     @GetMapping("/get")
     public String getMessages (Model model) {
         return consumerService.getStringFromActiveMQ();
+    }
+
+    @MessageMapping("/changeMessage")
+    @SendTo("/topic/activity")
+    public Message greeting(Message message) {
+        System.out.println(message);
+        return message;
     }
 }
