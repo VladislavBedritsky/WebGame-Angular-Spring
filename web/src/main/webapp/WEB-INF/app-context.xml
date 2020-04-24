@@ -18,7 +18,7 @@
     <mvc:annotation-driven />
     <mvc:cors>
         <mvc:mapping path="/**"
-                     allowed-origins="*"
+                     allowed-origins="http://localhost:4200"
                      allowed-headers="Content-Type, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Authorization, X-Requested-With, requestId, Correlation-Id"
                      allowed-methods="GET, PUT, POST, DELETE"/>
     </mvc:cors>
