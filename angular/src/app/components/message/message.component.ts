@@ -62,7 +62,6 @@ export class MessageComponent implements OnInit {
                     );
     this._messageService.getMessages()
                 .subscribe(
-
                   messages => {
                     this.messages = messages;
                     this.processing = true;

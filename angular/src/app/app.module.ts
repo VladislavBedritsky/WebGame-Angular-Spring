@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { MessageComponent } from './components/message/message.component';
+import { TablegameComponent } from './components/tablegame/tablegame.component';
 
 const routes: Routes = [
     {path: 'main', component: MessageComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    MessageComponent
+    MessageComponent,
+    TablegameComponent
   ],
   imports: [
     BrowserModule,
