@@ -28,6 +28,9 @@
         <org.json.version>20160810</org.json.version>
         <jackson-databind.version>2.10.1</jackson-databind.version>
         <io.projectreactor.netty.reactor-netty.version>0.9.6.RELEASE</io.projectreactor.netty.reactor-netty.version>
+        <liquibase-maven-plugin.version>3.4.1</liquibase-maven-plugin.version>
+        <mysql-connector-java.version>8.0.18</mysql-connector-java.version>
+        <spring.security.version>4.2.0.RELEASE</spring.security.version>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-war-plugin.version>2.4</maven-war-plugin.version>
@@ -76,6 +79,27 @@
                 <artifactId>spring-messaging</artifactId>
                 <version>${org.springframework.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${org.springframework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -93,6 +117,11 @@
                     <configuration>
                         <failOnMissingWebXml>false</failOnMissingWebXml>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>${liquibase-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

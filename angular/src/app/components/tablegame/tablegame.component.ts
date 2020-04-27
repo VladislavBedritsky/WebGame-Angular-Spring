@@ -4,6 +4,7 @@ import * as SockJS from 'sockjs-client';
 
 import { Message } from 'src/app/common/message'
 import { ButtonService } from 'src/app/service/button.service'
+import { MessageService } from 'src/app/service/message.service'
 
 @Component({
   selector: 'app-tablegame',
@@ -35,12 +36,17 @@ export class TablegameComponent implements OnInit {
   webSocketEndPoint: string = 'http://localhost:8080/websocket';
   message: Message;
 
-  constructor(private _buttonService: ButtonService) { }
+  userName: string
+
+  constructor(private _buttonService: ButtonService,
+              private _messageService: MessageService) { }
 
   ngOnInit(): void {
+    console.log(this._messageService.getUserName())
   }
 
   connect() {
+
       const socket = new SockJS(this.webSocketEndPoint);
       this.stompClient = Stomp.over(socket);
       this.stompClient.connect({}, frame => {

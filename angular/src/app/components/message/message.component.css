@@ -1,1 +1,37 @@
+#main-content {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+#main-content form {
+  position: relative;
+}
+
+#main-content h2 {
+  text-align: center;
+}
+
+#main-content form button {
+  margin-top: 3px;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+#main-content form button:hover {
+  margin-top: 3px;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  background-color: #e6e6e6;
+}
+
+
 

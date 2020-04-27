@@ -10,6 +10,7 @@ import { TablegameComponent } from './components/tablegame/tablegame.component';
 
 const routes: Routes = [
     {path: 'main', component: MessageComponent },
+    {path: 'game', component: TablegameComponent },
     {path: '', redirectTo: '/main', pathMatch: 'full'},
 ];
 

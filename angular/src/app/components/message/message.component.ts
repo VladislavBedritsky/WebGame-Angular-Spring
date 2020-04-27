@@ -20,7 +20,6 @@ export class MessageComponent implements OnInit {
   topic: string = '/topic/activity';
   stompClient: any;
 
-
   constructor(private _messageService: MessageService) {}
 
   ngOnInit(): void {
@@ -43,6 +42,10 @@ export class MessageComponent implements OnInit {
           this.stompClient.disconnect();
       }
       console.log("Disconnected");
+  }
+
+  submitUsername() {
+    this._messageService.setUserName(this.userName)
   }
 
   sendMessage() {

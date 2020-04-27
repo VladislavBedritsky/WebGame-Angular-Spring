@@ -10,7 +10,17 @@ import { Message } from 'src/app/common/message'
 })
 export class MessageService {
 
+  private userName: string
+
   constructor(private http: HttpClient) { }
 
+  getUserName() {
+    return this.userName;
+  }
 
+  setUserName(userName) {
+    this.userName = userName
+    console.log(userName)
+    console.log(this.userName)
+  }
 }
