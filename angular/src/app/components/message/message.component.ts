@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import { Observable } from "rxjs";
 
-import { Message } from 'src/app/common/message'
+import { User } from 'src/app/common/user'
 import { MessageService } from 'src/app/service/message.service'
 
 @Component({
@@ -12,21 +13,17 @@ import { MessageService } from 'src/app/service/message.service'
 })
 export class MessageComponent implements OnInit {
 
-  messages: Message[];
-  processing = false;
-
-  greeting: Message;
+  user: User;
   userName: string;
-  content: any;
 
   webSocketEndPoint: string = 'http://localhost:8080/websocket';
   topic: string = '/topic/activity';
   stompClient: any;
 
+
   constructor(private _messageService: MessageService) {}
 
   ngOnInit(): void {
-    this.processing = false;
   }
 
   connect() {
@@ -34,9 +31,9 @@ export class MessageComponent implements OnInit {
       this.stompClient = Stomp.over(socket);
       this.stompClient.connect({}, frame => {
           console.log('Connected: ' + frame);
-          this.stompClient.subscribe(this.topic, message => {
-              this.greeting = JSON.parse(message.body)
-              this.content = this.greeting.content
+          this.stompClient.subscribe(this.topic, data => {
+              this.user = JSON.parse(data.body)
+              this.userName = this.user.name
           });
       });
   }
@@ -50,24 +47,9 @@ export class MessageComponent implements OnInit {
 
   sendMessage() {
       console.log("calling logout api via web socket");
-      this.stompClient.send("/app/hello", {}, JSON.stringify(this.userName));
+      this.stompClient.send("/app/auth", {}, JSON.stringify({
+        name: this.userName, victory: 0
+      }));
   }
 
-  getAll() {
-    this._messageService.sendMessage()
-                    .subscribe(
-                      message => {
-                        console.log(message);
-                      }
-                    );
-    this._messageService.getMessages()
-                .subscribe(
-                  messages => {
-                    this.messages = messages;
-                    this.processing = true;
-                        console.log(this.messages);
-                        console.log(this.processing);
-                  }
-                );
-  }
 }

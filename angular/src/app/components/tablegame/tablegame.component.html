@@ -6,6 +6,20 @@
 <div class="container" *ngIf="isGameOver">
   Game Over... Winner is {{ victoryButton }}
 </div>
+
+<div class="col-md-6">
+  <form class="form-inline">
+    <div class="form-group">
+      <label >WebSocket connection:</label>
+      <button (click)="connect()" class="btn btn-default" type="submit">Connect</button>
+      <button (click)="disconnect()" class="btn btn-default" type="submit" disabled="disabled">Disconnect</button>
+    </div>
+    <div>
+      <button (click)="restartGame()" class="btn btn-default" type="submit">Restart</button>
+    </div>
+  </form>
+</div>
+
 <div id="XOcontainer" class="container">
   <div class="row">
     <button (click)="button1Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b1">

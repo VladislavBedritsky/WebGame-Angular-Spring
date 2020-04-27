@@ -23,11 +23,6 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
                 .enableSimpleBroker("/topic");
         messageBrokerRegistry
                 .setApplicationDestinationPrefixes("/app");
-//                .enableStompBrokerRelay("/topic")
-//                .setRelayHost("35.239.53.104")
-//                .setRelayPort(61616)
-//                .setClientLogin("admin")
-//                .setClientPasscode("admin");
     }
 
 }
