@@ -3,8 +3,6 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 
 import { Message } from 'src/app/common/message'
-import { ButtonService } from 'src/app/service/button.service'
-import { MessageService } from 'src/app/service/message.service'
 
 @Component({
   selector: 'app-tablegame',
@@ -38,11 +36,9 @@ export class TablegameComponent implements OnInit {
 
   userName: string
 
-  constructor(private _buttonService: ButtonService,
-              private _messageService: MessageService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    console.log(this._messageService.getUserName())
   }
 
   connect() {

@@ -1,6 +1,9 @@
 
 <div id="main-content">
   <h2>Hello, What is your name?</h2>
+  <div [hidden]="!isUserAlreadyExists" class="text-danger mt-2">
+    <p align="center">Such username is already exists.. Try again!</p>
+  </div>
   <form>
     <input type="text" [(ngModel)]="userName" class="form-control" name="name">
     <button (click)="submitUsername()" class="btn btn-default" type="submit">Send</button>

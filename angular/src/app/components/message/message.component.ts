@@ -4,7 +4,7 @@ import * as SockJS from 'sockjs-client';
 import { Observable } from "rxjs";
 
 import { User } from 'src/app/common/user'
-import { MessageService } from 'src/app/service/message.service'
+import { UserService } from 'src/app/service/user.service'
 
 @Component({
   selector: 'app-message',
@@ -20,7 +20,9 @@ export class MessageComponent implements OnInit {
   topic: string = '/topic/activity';
   stompClient: any;
 
-  constructor(private _messageService: MessageService) {}
+  isUserAlreadyExists: boolean = false
+
+  constructor(private _userService: UserService) {}
 
   ngOnInit(): void {
   }
@@ -44,8 +46,27 @@ export class MessageComponent implements OnInit {
       console.log("Disconnected");
   }
 
-  submitUsername() {
-    this._messageService.setUserName(this.userName)
+  submitUsername():void {
+      const body = {id: 1, username: this.userName, password: 'qq', active: 1 };
+      this._userService.getUserByUsername(this.userName).subscribe(
+        data => {
+
+          if (data === null) {
+            this._userService.saveUser(body).subscribe(
+              data => {
+                console.log(data);
+              }
+            )
+          } else {
+            this.isUserAlreadyExists = true;
+          }
+
+        }
+      )
+  }
+
+  checkIfUserExistsInDB() {
+
   }
 
   sendMessage() {
