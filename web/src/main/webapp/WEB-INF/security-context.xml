@@ -11,6 +11,7 @@
         <security:intercept-url pattern="/logout" access="permitAll" />
         <security:intercept-url pattern="/registration" access="permitAll" />
         <security:intercept-url pattern="/getUserBy/*" access="permitAll" />
+        <security:intercept-url pattern="/websocket/**" access="permitAll" />
         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
         <security:logout logout-success-url="/" />
         <security:csrf disabled="true" />

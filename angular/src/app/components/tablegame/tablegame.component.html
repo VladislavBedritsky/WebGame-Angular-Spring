@@ -1,10 +1,11 @@
-<label class="form-group">X or O ? -></label>
-<button (click)="markXClick()" [disabled]="marksArePicked" class="btn btn-default" type="submit">X</button>
-<button (click)="markOClick()" [disabled]="marksArePicked" class="btn btn-default" type="submit">O</button>
-<label *ngIf="userChoiceIsX" class="form-group">Your mark is - X</label>
-<label *ngIf="userChoiceIs0" class="form-group">Your mark is - 0</label>
-<div class="container" *ngIf="isGameOver">
-  Game Over... Winner is {{ victoryButton }}
+
+<label class="form-group">Hello, {{username}}. Please make your choice:</label>
+<button (click)="markXClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">X</button>
+<button (click)="markOClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">O</button>
+<label *ngIf="_webSocketService.userChoiceIsX" class="form-group">Your mark is - X</label>
+<label *ngIf="_webSocketService.userChoiceIs0" class="form-group">Your mark is - 0</label>
+<div class="container" *ngIf="_webSocketService.isGameOver">
+  Game Over... Winner is {{ _webSocketService.victoryButton }}
 </div>
 
 <div class="col-md-6">
@@ -15,44 +16,43 @@
       <button (click)="disconnect()" class="btn btn-default" type="submit" disabled="disabled">Disconnect</button>
     </div>
     <div>
-      <button (click)="restartGame()" class="btn btn-default" type="submit">Restart</button>
-      {{userName}}
+      <button [disabled]="!_webSocketService.isGameOver" (click)="restartGame()" class="btn btn-default" type="submit">Restart</button>
     </div>
   </form>
 </div>
 
 <div id="XOcontainer" class="container">
   <div class="row">
-    <button (click)="button1Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b1">
-      {{button1 === '1' ? '' : button1}}
+    <button (click)="button1Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b1">
+      {{_webSocketService.button1 === '1' ? '' : _webSocketService.button1}}
     </button>
-    <button (click)="button2Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b2">
-      {{button2 === '2' ? '' : button2}}
+    <button (click)="button2Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b2">
+      {{_webSocketService.button2 === '2' ? '' : _webSocketService.button2}}
     </button>
-    <button (click)="button3Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b3">
-      {{button3 === '3' ? '' : button3}}
-    </button>
-  </div>
-  <div class="row">
-    <button (click)="button4Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b4">
-      {{button4 === '4' ? '' : button4}}
-    </button>
-    <button (click)="button5Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b5">
-      {{button5 === '5' ? '' : button5}}
-    </button>
-    <button (click)="button6Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b6">
-      {{button6 === '6' ? '' : button6}}
+    <button (click)="button3Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b3">
+      {{_webSocketService.button3 === '3' ? '' : _webSocketService.button3}}
     </button>
   </div>
   <div class="row">
-    <button (click)="button7Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b7">
-      {{button7 === '7' ? '' : button7}}
+    <button (click)="button4Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b4">
+      {{_webSocketService.button4 === '4' ? '' : _webSocketService.button4}}
     </button>
-    <button (click)="button8Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b8">
-      {{button8 === '8' ? '' : button8}}
+    <button (click)="button5Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b5">
+      {{_webSocketService.button5 === '5' ? '' : _webSocketService.button5}}
     </button>
-    <button (click)="button9Click()" [disabled]="!marksArePicked || isGameOver" class="col" id="b9">
-      {{button9 === '9' ? '' : button9}}
+    <button (click)="button6Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b6">
+      {{_webSocketService.button6 === '6' ? '' : _webSocketService.button6}}
+    </button>
+  </div>
+  <div class="row">
+    <button (click)="button7Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b7">
+      {{_webSocketService.button7 === '7' ? '' : _webSocketService.button7}}
+    </button>
+    <button (click)="button8Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b8">
+      {{_webSocketService.button8 === '8' ? '' : _webSocketService.button8}}
+    </button>
+    <button (click)="button9Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b9">
+      {{_webSocketService.button9 === '9' ? '' : _webSocketService.button9}}
     </button>
   </div>
 </div>
