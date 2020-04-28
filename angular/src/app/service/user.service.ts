@@ -27,9 +27,8 @@ export class UserService {
     return this._httpClient.get(url);
   }
 
-  getPrincipal(username: string, password: string) {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this._httpClient.get(this.userAuthenticationUrl, {headers});
+  getPrincipal() {
+    return this._httpClient.get(this.userAuthenticationUrl);
   }
 
   deleteUser() {
