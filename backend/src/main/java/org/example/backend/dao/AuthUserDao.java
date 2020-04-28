@@ -19,6 +19,8 @@ public class AuthUserDao {
     private String findByUsername;
     @Value("${user.saveByUsername}")
     private String saveByUsername;
+    @Value("${user.deleteByUsername}")
+    private String deleteByUsername;
 
     public AuthUser findByUsername(String username) {
         AuthUser authUser;
@@ -35,5 +37,9 @@ public class AuthUserDao {
                 authUser.getUsername(),
                 authUser.getPassword(),
                 authUser.getActive());
+    }
+
+    public void deleteUserByUsername(String username) {
+        jdbcTemplate.update(deleteByUsername, username);
     }
 }

@@ -27,4 +27,8 @@ public class AuthUserService implements UserDetailsService {
     public AuthUser findAuthUserByUsername(String username) {
         return authUserDao.findByUsername(username);
     }
+
+    public void deleteUserByUsername(String username) {
+        authUserDao.deleteUserByUsername(username);
+    }
 }

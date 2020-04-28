@@ -29,6 +29,11 @@ public class MainController {
         return authUserService.findAuthUserByUsername(username);
     }
 
+    @DeleteMapping("/deleteUserBy/{username}")
+    public void deleteUser(@PathVariable String username) {
+        authUserService.deleteUserByUsername(username);
+    }
+
     @PostMapping("/registration")
     public AuthUser saveUser(@RequestBody AuthUser authUser) {
         authUserService.saveAuthUser(authUser);

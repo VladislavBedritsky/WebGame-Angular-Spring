@@ -7,10 +7,14 @@ import { FormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 import { MessageComponent } from './components/message/message.component';
 import { TablegameComponent } from './components/tablegame/tablegame.component';
+import { BasicAuthHttpInterceptorService } from 'src/app/service/basic-auth-http-interceptor.service';
+import { AuthGuardService } from 'src/app/service/auth-guard.service';
+import { LogoutComponent } from './components/logout/logout.component';
 
 const routes: Routes = [
     {path: 'main', component: MessageComponent },
-    {path: 'game', component: TablegameComponent },
+    {path: 'game', component: TablegameComponent, canActivate:[AuthGuardService] },
+    {path: 'logout', component: LogoutComponent, canActivate:[AuthGuardService] },
     {path: '', redirectTo: '/main', pathMatch: 'full'},
 ];
 
@@ -18,7 +22,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     MessageComponent,
-    TablegameComponent
+    TablegameComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,11 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

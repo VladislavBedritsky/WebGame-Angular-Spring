@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import { Observable } from "rxjs";
 
 import { User } from 'src/app/common/user'
 import { UserService } from 'src/app/service/user.service'
@@ -46,6 +45,13 @@ export class MessageComponent implements OnInit {
       console.log("Disconnected");
   }
 
+  sendMessage() {
+      console.log("calling logout api via web socket");
+      this.stompClient.send("/app/auth", {}, JSON.stringify({
+        name: this.userName, victory: 0
+      }));
+  }
+
   submitUsername():void {
       const body = {id: 1, username: this.userName, password: 'qq', active: 1 };
       this._userService.getUserByUsername(this.userName).subscribe(
@@ -54,9 +60,17 @@ export class MessageComponent implements OnInit {
           if (data === null) {
             this._userService.saveUser(body).subscribe(
               data => {
-                console.log(data);
+                this._userService.authenticate(data['username'], data['password']).subscribe(
+                  data => {
+                    if(data['authenticated'] === true) {
+                      this._userService.navigateToGame()
+                    }
+                  }
+                )
               }
             )
+            this.isUserAlreadyExists = false;
+
           } else {
             this.isUserAlreadyExists = true;
           }
@@ -65,15 +79,5 @@ export class MessageComponent implements OnInit {
       )
   }
 
-  checkIfUserExistsInDB() {
-
-  }
-
-  sendMessage() {
-      console.log("calling logout api via web socket");
-      this.stompClient.send("/app/auth", {}, JSON.stringify({
-        name: this.userName, victory: 0
-      }));
-  }
 
 }
