@@ -24,15 +24,7 @@ export class TablegameComponent implements OnInit {
   }
 
   navigateToLobby() {
-    this._roomService.getRoomById(1).subscribe(
-      data => {
-        var amountOfPeople = data['amountOfPeople'] - 1;
-
-        const body = {id: 1, name: 'room1', amountOfPeople: amountOfPeople };
-        this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe()
-        this._roomService.navigateToLobby();
-      }
-    )
+    this._roomService.navigateToLobby();
   }
 
   connect() {

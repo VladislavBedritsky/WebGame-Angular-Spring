@@ -299,7 +299,6 @@ export class WebsocketService {
     this._roomService.getRoomById(1).subscribe(
         data => {
              this.amountOfPeopleInRoom1 = data['amountOfPeople']
-             console.log(data)
         });
   }
 
