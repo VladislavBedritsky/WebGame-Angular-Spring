@@ -3,6 +3,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 
 import { Message } from 'src/app/common/message'
+import { RoomService } from 'src/app/service/room.service'
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,10 @@ export class WebsocketService {
   topic: string = '/topic/activity';
   message: Message;
 
-  constructor() { }
+  amountOfPeopleInRoom1: number = 0
+  isRoom1Full: boolean = false
+
+  constructor(private _roomService: RoomService) { }
 
   connect() {
       const socket = new SockJS(this.webSocketEndPoint);
@@ -75,7 +79,6 @@ export class WebsocketService {
                   this.marksArePicked = true;
                 }
               }
-
           });
       });
   }
@@ -285,5 +288,20 @@ export class WebsocketService {
       this.marksArePicked = false;
       this.isGameOver = false;
   }
+
+  sendAmountOfPeopleInRoom1(messageMapping: string) {
+      this.stompClient.send(messageMapping, {}, JSON.stringify({
+          content : '', buttonName : 'amountOfPeopleInRoom1'
+          }));
+  }
+
+  getAmountOfPeopleInRoom1() {
+    this._roomService.getRoomById(1).subscribe(
+        data => {
+             this.amountOfPeopleInRoom1 = data['amountOfPeople']
+             console.log(data)
+        });
+  }
+
 
 }

@@ -11,10 +11,10 @@ import { RoomService } from 'src/app/service/room.service'
 })
 export class LobbyComponent implements OnInit {
 
-  amountOfPeopleInRoom1: number
-  isRoom1Full: boolean = false
   username: string
   messageMapping: string = '/app/lobby'
+
+  amountOfPeopleInRoom1: number = 0
 
   constructor(private _router: Router,
               public _webSocketService: WebsocketService,
@@ -24,7 +24,6 @@ export class LobbyComponent implements OnInit {
 
   ngOnInit(): void {
     this._webSocketService.connect()
-    this.getAmountOfPeopleInRoom1(1)
   }
 
   joinRoom1() {
@@ -33,19 +32,13 @@ export class LobbyComponent implements OnInit {
   }
 
   updateAmountOfPeopleInRoomByID(id: number) {
-    const body = {id: id, name: 'room1', amountOfPeople: this.amountOfPeopleInRoom1++ };
-    this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe(
-      data => console.log(data)
-    )
-  }
-
-  getAmountOfPeopleInRoom1(id: number) {
-    this._roomService.getRoomById(id).subscribe(
+    this._roomService.getRoomById(1).subscribe(
         data => {
-              console.log(data['amountOfPeople'])
-              this.amountOfPeopleInRoom1 = data['amountOfPeople']
+             var amountOfPeople = data['amountOfPeople']+1;
+             console.log(amountOfPeople)
+             const body = {id: id, name: 'room1', amountOfPeople: amountOfPeople };
+             this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe()
         });
-                      console.log(this.amountOfPeopleInRoom1)
   }
 
 }

@@ -16,8 +16,6 @@ export class TablegameComponent implements OnInit {
   username: string = sessionStorage.getItem('username')
   messageMapping: string = '/app/room1'
 
-  amountOfPeople: number
-
   constructor(public _webSocketService: WebsocketService,
               private _roomService: RoomService) { }
 
@@ -28,16 +26,13 @@ export class TablegameComponent implements OnInit {
   navigateToLobby() {
     this._roomService.getRoomById(1).subscribe(
       data => {
-        this.amountOfPeople = data['amountOfPeople']
-        console.log(this.amountOfPeople)
+        var amountOfPeople = data['amountOfPeople'] - 1;
+
+        const body = {id: 1, name: 'room1', amountOfPeople: amountOfPeople };
+        this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe()
+        this._roomService.navigateToLobby();
       }
     )
-
-    const body = {id: 1, name: 'room1', amountOfPeople: this.amountOfPeople-- };
-    this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe(
-      data => console.log(data)
-    )
-    this._roomService.navigateToLobby();
   }
 
   connect() {
