@@ -3,8 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-import { AuthUser } from 'src/app/common/auth-user'
-
 @Injectable({
   providedIn: 'root'
 })
@@ -62,7 +60,7 @@ export class UserService {
   }
 
   navigateToGame() {
-    this._router.navigate(['game']);
+    this._router.navigate(['lobby']);
   }
 
 }

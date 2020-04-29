@@ -10,11 +10,13 @@ import { TablegameComponent } from './components/tablegame/tablegame.component';
 import { BasicAuthHttpInterceptorService } from 'src/app/service/basic-auth-http-interceptor.service';
 import { AuthGuardService } from 'src/app/service/auth-guard.service';
 import { LogoutComponent } from './components/logout/logout.component';
+import { LobbyComponent } from './components/lobby/lobby.component';
 
 const routes: Routes = [
     {path: 'main', component: MessageComponent },
-    {path: 'game', component: TablegameComponent, canActivate:[AuthGuardService] },
+    {path: 'room1', component: TablegameComponent, canActivate:[AuthGuardService] },
     {path: 'logout', component: LogoutComponent, canActivate:[AuthGuardService] },
+    {path: 'lobby', component: LobbyComponent, canActivate:[AuthGuardService] },
     {path: '', redirectTo: '/main', pathMatch: 'full'},
 ];
 
@@ -23,7 +25,8 @@ const routes: Routes = [
     AppComponent,
     MessageComponent,
     TablegameComponent,
-    LogoutComponent
+    LogoutComponent,
+    LobbyComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import * as SockJS from 'sockjs-client';
 
 import { Message } from 'src/app/common/message'
 import { WebsocketService } from 'src/app/service/websocket.service'
+import { RoomService } from 'src/app/service/room.service'
 
 @Component({
   selector: 'app-tablegame',
@@ -13,11 +14,30 @@ import { WebsocketService } from 'src/app/service/websocket.service'
 export class TablegameComponent implements OnInit {
 
   username: string = sessionStorage.getItem('username')
-  messageMapping: string = '/app/hello'
+  messageMapping: string = '/app/room1'
 
-  constructor(public _webSocketService: WebsocketService) { }
+  amountOfPeople: number
+
+  constructor(public _webSocketService: WebsocketService,
+              private _roomService: RoomService) { }
 
   ngOnInit(): void {
+    this.connect()
+  }
+
+  navigateToLobby() {
+    this._roomService.getRoomById(1).subscribe(
+      data => {
+        this.amountOfPeople = data['amountOfPeople']
+        console.log(this.amountOfPeople)
+      }
+    )
+
+    const body = {id: 1, name: 'room1', amountOfPeople: this.amountOfPeople-- };
+    this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe(
+      data => console.log(data)
+    )
+    this._roomService.navigateToLobby();
   }
 
   connect() {
@@ -84,5 +104,7 @@ export class TablegameComponent implements OnInit {
   setValuesAfterRestart() {
     this._webSocketService.setValuesAfterRestart()
   }
+
+
 
 }

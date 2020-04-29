@@ -17,6 +17,7 @@
     </div>
     <div>
       <button [disabled]="!_webSocketService.isGameOver" (click)="restartGame()" class="btn btn-default" type="submit">Restart</button>
+      <button (click)="navigateToLobby()" class="btn btn-default" type="submit">Go to Lobby</button>
     </div>
   </form>
 </div>

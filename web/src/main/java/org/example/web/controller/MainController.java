@@ -40,9 +40,9 @@ public class MainController {
         return authUserService.findAuthUserByUsername(authUser.getUsername());
     }
 
-    @MessageMapping("/hello")
+    @MessageMapping("/room1")
     @SendTo("/topic/activity")
-    public Message greeting(Message message) {
+    public Message room1 (Message message) {
         return new Message(message.getContent(), message.getButtonName());
     }
 
@@ -50,5 +50,17 @@ public class MainController {
     @SendTo("/topic/activity")
     public User getUser(User user) {
         return new User(user.getName(), user.getVictory());
+    }
+
+    @MessageMapping("/lobby")
+    @SendTo("/topic/activity")
+    public Message lobby(Message message) {
+        return new Message(message.getContent(), message.getButtonName());
+    }
+
+    @MessageMapping("/room2")
+    @SendTo("/topic/activity")
+    public Message room2 (Message message) {
+        return new Message(message.getContent(), message.getButtonName());
     }
 }
