@@ -32,8 +32,10 @@ export class TablegameComponent implements OnInit, OnDestroy {
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
-    this.disconnect()
-  }
+     // this.disconnect()
+   $event.returnValue = true
+       console.log('d')
+       }
 
 
   decreaseAmountOfPeople(id: number) {
