@@ -11,13 +11,15 @@ import { BasicAuthHttpInterceptorService } from 'src/app/service/basic-auth-http
 import { AuthGuardService } from 'src/app/service/auth-guard.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
+import { CanDeactivateGuardService } from 'src/app/service/can-deactivate-guard.service';
 
 const routes: Routes = [
     {path: 'main', component: MessageComponent },
-    {path: 'room1', component: TablegameComponent, canActivate:[AuthGuardService] },
+    {path: 'room1', component: TablegameComponent, canActivate:[AuthGuardService], canDeactivate:[CanDeactivateGuardService] },
     {path: 'logout', component: LogoutComponent, canActivate:[AuthGuardService] },
     {path: 'lobby', component: LobbyComponent, canActivate:[AuthGuardService] },
     {path: '', redirectTo: '/main', pathMatch: 'full'},
+    {path: '**', redirectTo: '/lobby'},
 ];
 
 @NgModule({

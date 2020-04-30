@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import { Router, RouterEvent, NavigationEnd  } from '@angular/router';
 
 import { Message } from 'src/app/common/message'
 import { WebsocketService } from 'src/app/service/websocket.service'
@@ -19,14 +20,38 @@ export class TablegameComponent implements OnInit, OnDestroy {
   usersInRoom: number = 0
 
   constructor(public _webSocketService: WebsocketService,
-              private _roomService: RoomService) { }
+              private _roomService: RoomService,
+              private _router: Router) { }
 
   ngOnInit(): void {
     this.connect()
   }
 
   ngOnDestroy(): void {
+  }
 
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    this.disconnect()
+  }
+
+
+  decreaseAmountOfPeople(id: number) {
+    this._roomService.getRoomById(id).subscribe(
+        data => {
+             var amountOfPeople = data['amountOfPeople'] - 1;
+             const body = {id: id, name: 'room1', amountOfPeople: amountOfPeople };
+             this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe()
+        });
+  }
+
+  increaseAmountOfPeopleInRoomByID(id: number) {
+    this._roomService.getRoomById(id).subscribe(
+        data => {
+             var amountOfPeople = data['amountOfPeople'] + 1;
+             const body = {id: id, name: 'room1', amountOfPeople: amountOfPeople };
+             this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe()
+        });
   }
 
   navigateToLobby() {
@@ -34,10 +59,12 @@ export class TablegameComponent implements OnInit, OnDestroy {
   }
 
   connect() {
+    this.increaseAmountOfPeopleInRoomByID(1)
     this._webSocketService.connect()
   }
 
   disconnect() {
+    this.decreaseAmountOfPeople(1)
     this._webSocketService.disconnect()
   }
 

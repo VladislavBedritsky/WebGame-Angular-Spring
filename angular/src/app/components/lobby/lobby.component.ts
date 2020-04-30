@@ -29,7 +29,6 @@ export class LobbyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.definePreviousUrl()
     this.getAmountOfPeopleInRoom1()
   }
 
@@ -41,29 +40,11 @@ export class LobbyComponent implements OnInit {
              var amountOfPeople = data['amountOfPeople'];
              if (amountOfPeople === 2) {
                 this.isRoom1Full = true
+                this.amountOfPeopleInRoom1 = 2
+                this._router.navigate(['lobby']);
              } else {
-                this.increaseAmountOfPeopleInRoomByID(1)
                 this._router.navigate(['room1']);
              }
-        });
-  }
-
-  increaseAmountOfPeopleInRoomByID(id: number) {
-    this._roomService.getRoomById(1).subscribe(
-        data => {
-             var amountOfPeople = data['amountOfPeople'] + 1;
-             const body = {id: id, name: 'room1', amountOfPeople: amountOfPeople };
-             this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe()
-        });
-  }
-
-  decreaseAmountOfPeopleInRoomByID(id: number) {
-
-    this._roomService.getRoomById(1).subscribe(
-        data => {
-             var amountOfPeople = data['amountOfPeople'] - 1;
-             const body = {id: id, name: 'room1', amountOfPeople: amountOfPeople };
-             this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe()
         });
   }
 
@@ -75,7 +56,7 @@ export class LobbyComponent implements OnInit {
         this.currentUrl = event.url;
 
         if(this.previousUrl === '/room1') {
-         this.decreaseAmountOfPeopleInRoomByID(1)
+         console.log('/room1')
         }
       };
     });
@@ -88,6 +69,8 @@ export class LobbyComponent implements OnInit {
         this.amountOfPeopleInRoom1 = data['amountOfPeople']
         if (this.amountOfPeopleInRoom1 === 2) {
           this.isRoom1Full = true
+        } else {
+          this.isRoom1Full = false
         }
       }
     )
