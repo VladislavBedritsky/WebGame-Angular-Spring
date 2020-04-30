@@ -1,4 +1,4 @@
-#main-content {
+#registration, #signIn {
   position: absolute;
   top: 20%;
   left: 50%;
@@ -8,29 +8,37 @@
   transform: translateX(-50%);
 }
 
-#main-content form {
-  position: relative;
-}
-
-#main-content h2 {
+#registration h2,
+ #signIn h2 {
   text-align: center;
 }
 
-#main-content form button {
-  margin-top: 3px;
-  position: absolute;
+#registration form button,
+ #signIn form button {
+  margin-top: 2px;
+  position: relative;
   left: 50%;
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
 }
 
-#main-content form button:hover {
-  margin-top: 3px;
-  position: absolute;
+#registration form button:hover,
+ #signIn form button:hover {
+  margin-top: 2px;
+  position: relative;
   left: 50%;
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
   background-color: #e6e6e6;
+}
+
+#registration a {
+  color: blue;
+}
+
+#signIn div {
+  color: blue;
+  margin-left: 10px;
 }
 
 

@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AuthUserService implements UserDetailsService {
 
@@ -30,5 +32,9 @@ public class AuthUserService implements UserDetailsService {
 
     public void deleteUserByUsername(String username) {
         authUserDao.deleteUserByUsername(username);
+    }
+
+    public List<AuthUser> findAll() {
+        return authUserDao.findAll();
     }
 }

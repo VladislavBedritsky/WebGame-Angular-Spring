@@ -15,7 +15,6 @@ import { CanDeactivateGuardService } from 'src/app/service/can-deactivate-guard.
 
 const routes: Routes = [
     {path: 'main', component: MessageComponent },
-    {path: 'room1', component: TablegameComponent, canActivate:[AuthGuardService], canDeactivate:[CanDeactivateGuardService] },
     {path: 'logout', component: LogoutComponent, canActivate:[AuthGuardService] },
     {path: 'lobby', component: LobbyComponent, canActivate:[AuthGuardService] },
     {path: '', redirectTo: '/main', pathMatch: 'full'},

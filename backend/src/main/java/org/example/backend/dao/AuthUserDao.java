@@ -9,6 +9,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @PropertySource("classpath:sql_user.properties")
 public class AuthUserDao {
@@ -21,6 +23,8 @@ public class AuthUserDao {
     private String saveByUsername;
     @Value("${user.deleteByUsername}")
     private String deleteByUsername;
+    @Value("${user.findAll}")
+    private String findAll;
 
     public AuthUser findByUsername(String username) {
         AuthUser authUser;
@@ -41,5 +45,9 @@ public class AuthUserDao {
 
     public void deleteUserByUsername(String username) {
         jdbcTemplate.update(deleteByUsername, username);
+    }
+
+    public List<AuthUser> findAll() {
+        return jdbcTemplate.query(findAll, new AuthUserMapper());
     }
 }

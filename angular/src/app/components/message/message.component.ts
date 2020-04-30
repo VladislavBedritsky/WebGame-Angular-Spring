@@ -14,12 +14,15 @@ export class MessageComponent implements OnInit {
 
   user: User;
   userName: string;
+  password: string;
 
   webSocketEndPoint: string = 'http://localhost:8080/websocket';
   topic: string = '/topic/activity';
   stompClient: any;
 
   isUserAlreadyExists: boolean = false
+
+  isUserHasAccount: boolean = true
 
   constructor(private _userService: UserService) {}
 
@@ -52,8 +55,12 @@ export class MessageComponent implements OnInit {
       }));
   }
 
+  registration() {
+
+  }
+
   submitUsername():void {
-      const body = {id: 1, username: this.userName, password: 'qq', active: 1 };
+      const body = {id: 1, username: this.userName, password: this.password, active: 1 };
       this._userService.getUserByUsername(this.userName).subscribe(
         data => {
 
@@ -79,5 +86,12 @@ export class MessageComponent implements OnInit {
       )
   }
 
+  changeForm() {
+    if (this.isUserHasAccount === true) {
+      this.isUserHasAccount = false
+    } else {
+      this.isUserHasAccount = true
+    }
+  }
 
 }
