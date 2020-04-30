@@ -33,9 +33,6 @@ export class WebsocketService {
   topic: string = '/topic/activity';
   message: Message;
 
-  amountOfPeopleInRoom1: number = 0
-  isRoom1Full: boolean = false
-
   constructor(private _roomService: RoomService) { }
 
   connect() {
@@ -288,19 +285,5 @@ export class WebsocketService {
       this.marksArePicked = false;
       this.isGameOver = false;
   }
-
-  sendAmountOfPeopleInRoom1(messageMapping: string) {
-      this.stompClient.send(messageMapping, {}, JSON.stringify({
-          content : '', buttonName : 'amountOfPeopleInRoom1'
-          }));
-  }
-
-  getAmountOfPeopleInRoom1() {
-    this._roomService.getRoomById(1).subscribe(
-        data => {
-             this.amountOfPeopleInRoom1 = data['amountOfPeople']
-        });
-  }
-
 
 }

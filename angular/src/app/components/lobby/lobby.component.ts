@@ -14,6 +14,9 @@ export class LobbyComponent implements OnInit {
   username: string
   messageMapping: string = '/app/lobby'
 
+  amountOfPeopleInRoom1: number = 0
+  isRoom1Full: boolean = false
+
   private previousUrl: string = undefined;
   private currentUrl: string = undefined;
 
@@ -26,13 +29,23 @@ export class LobbyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._webSocketService.connect()
     this.definePreviousUrl()
+    this.getAmountOfPeopleInRoom1()
   }
 
+
+
   joinRoom1() {
-     this.increaseAmountOfPeopleInRoomByID(1)
-     this._router.navigate(['room1']);
+    this._roomService.getRoomById(1).subscribe(
+        data => {
+             var amountOfPeople = data['amountOfPeople'];
+             if (amountOfPeople === 2) {
+                this.isRoom1Full = true
+             } else {
+                this.increaseAmountOfPeopleInRoomByID(1)
+                this._router.navigate(['room1']);
+             }
+        });
   }
 
   increaseAmountOfPeopleInRoomByID(id: number) {
@@ -61,7 +74,6 @@ export class LobbyComponent implements OnInit {
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
 
-        console.log(this.previousUrl)
         if(this.previousUrl === '/room1') {
          this.decreaseAmountOfPeopleInRoomByID(1)
         }
@@ -70,5 +82,15 @@ export class LobbyComponent implements OnInit {
 
   }
 
+  getAmountOfPeopleInRoom1() {
+    this._roomService.getRoomById(1).subscribe(
+      data => {
+        this.amountOfPeopleInRoom1 = data['amountOfPeople']
+        if (this.amountOfPeopleInRoom1 === 2) {
+          this.isRoom1Full = true
+        }
+      }
+    )
+  }
 
 }

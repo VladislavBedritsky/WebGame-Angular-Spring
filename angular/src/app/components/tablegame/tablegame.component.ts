@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 
@@ -11,16 +11,22 @@ import { RoomService } from 'src/app/service/room.service'
   templateUrl: './tablegame.component.html',
   styleUrls: ['./tablegame.component.css']
 })
-export class TablegameComponent implements OnInit {
+export class TablegameComponent implements OnInit, OnDestroy {
 
   username: string = sessionStorage.getItem('username')
   messageMapping: string = '/app/room1'
+
+  usersInRoom: number = 0
 
   constructor(public _webSocketService: WebsocketService,
               private _roomService: RoomService) { }
 
   ngOnInit(): void {
     this.connect()
+  }
+
+  ngOnDestroy(): void {
+
   }
 
   navigateToLobby() {
