@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,17 @@ export class UserService {
   private getUserByUsernameUrl = "http://localhost:8080/getUserBy"
   private deleteUserByUsernameUrl = "http://localhost:8080/deleteUserBy"
   private userAuthenticationUrl = "http://localhost:8080/user"
+  private getAllUsers = "http://localhost:8080/users"
 
   constructor(private _httpClient: HttpClient,
               private _router: Router) { }
 
   saveUser(authUser) {
     return this._httpClient.post(this.baseUrl, authUser);
+  }
+
+  getUsers(): Observable<string[]> {
+    return this._httpClient.get<string[]>(this.getAllUsers);
   }
 
   getUserByUsername(username: string) {

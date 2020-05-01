@@ -1,5 +1,28 @@
+<app-navbar></app-navbar>
 
-<h2>Hello, {{ username }}</h2>
+
+
+<div>
+  <div class="row">
+    <div class="col-4" style="border: 1px solid red;">
+      <h3>Players</h3>
+      <table class="mt-2" style="border: 1px solid green;" >
+        <tbody>
+        <tr *ngFor="let u of users"  (click)="q1(u.username)"
+            style="border: 1px solid blue;height: 50px;display: flex;align-items: center;">
+          <button class="btn btn-default" type="submit" style="border: 1px solid blue;">
+            <td>{{ u.username }}</td>
+          </button>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-8" style="border: 1px solid red;">
+      <h4>{{selectedU}}</h4>
+    </div>
+  </div>
+</div>
+
+
 <div class="form-group" [hidden]="true">
   <label >Room1:</label>
   <button [disabled]="isRoom1Full" (click)="joinRoom1()" class="btn btn-default" type="submit">Join</button>

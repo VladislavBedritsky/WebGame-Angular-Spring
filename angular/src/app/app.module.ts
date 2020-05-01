@@ -12,11 +12,13 @@ import { AuthGuardService } from 'src/app/service/auth-guard.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
 import { CanDeactivateGuardService } from 'src/app/service/can-deactivate-guard.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 const routes: Routes = [
     {path: 'main', component: MessageComponent },
     {path: 'logout', component: LogoutComponent, canActivate:[AuthGuardService] },
     {path: 'lobby', component: LobbyComponent, canActivate:[AuthGuardService] },
+    {path: 'room1', component: TablegameComponent, canActivate:[AuthGuardService], canDeactivate:[CanDeactivateGuardService] },
     {path: '', redirectTo: '/main', pathMatch: 'full'},
     {path: '**', redirectTo: '/lobby'},
 ];
@@ -27,7 +29,8 @@ const routes: Routes = [
     MessageComponent,
     TablegameComponent,
     LogoutComponent,
-    LobbyComponent
+    LobbyComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

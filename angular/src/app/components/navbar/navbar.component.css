@@ -1,0 +1,82 @@
+#navbar {
+    background-color: purple;
+}
+
+#navbar .navbar-brand {
+    font-size: 20px;
+    color: white;
+}
+
+#navbar .navbar-toggler-icon {
+    background-color: white;
+}
+
+#navbar .navbar-toggler-icon:hover {
+    background-color: #00FFFF;
+}
+
+#navbar .navbar-brand:hover,
+ #navbar .navbar-brand:focus {
+    font-size: 20px;
+    color: #00FFFF;
+    text-decoration:none;
+}
+
+#navbar .collapse a {
+    font-size: 20px;
+    color: white;
+}
+
+#navbar .collapse a:hover {
+    font-size: 20px;
+    color: #00FFFF;
+}
+
+#navbar .collapse .dropdown-menu,
+  #navbar .collapse .dropdown-menu > a
+ {
+    background-color: black;
+}
+
+#navbar .collapse .nav-item:hover .dropdown-menu {
+
+}
+
+#navbar #button_login,
+ #navbar #button_login1 {
+    background-color: purple;
+    border:0;
+    outline: none;
+}
+
+#navbar .material-icons {
+    font-size: 2.0em;
+    color: white;
+    padding-top: 10px;
+}
+
+#navbar #button_login1 .material-icons {
+
+}
+
+#navbar .material-icons:hover {
+    color: #00FFFF;
+}
+
+#navbar .modal .btn {
+    border: 0;
+    outline: none;
+}
+
+#navbar .modal a {
+    text-decoration: none;
+}
+
+#navbar .modal a:hover {
+    color: tomato;
+    text-decoration: none;
+}
+
+#navbar .navbar-link-q {
+    text-decoration: none;
+}
