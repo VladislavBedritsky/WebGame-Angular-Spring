@@ -30,17 +30,17 @@ export class WebsocketService {
 
   stompClient: any;
   webSocketEndPoint: string = 'http://localhost:8080/websocket';
-  topic: string = '/topic/activity';
   message: Message;
 
-  constructor(private _roomService: RoomService) { }
+  constructor(private _roomService: RoomService) {
+  }
 
-  connect() {
+  connect(topic: string) {
       const socket = new SockJS(this.webSocketEndPoint);
       this.stompClient = Stomp.over(socket);
       this.stompClient.connect({}, frame => {
           console.log('Connected: ' + frame);
-          this.stompClient.subscribe(this.topic, data => {
+          this.stompClient.subscribe(topic, data => {
               this.message = JSON.parse(data.body)
               if (this.message.buttonName === 'b1' ) {
                 this.button1 = this.message.content

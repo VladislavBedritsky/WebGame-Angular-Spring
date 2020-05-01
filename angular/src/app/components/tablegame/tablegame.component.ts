@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Input } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { Router, RouterEvent, NavigationEnd  } from '@angular/router';
 
 import { Message } from 'src/app/common/message'
 import { WebsocketService } from 'src/app/service/websocket.service'
-import { RoomService } from 'src/app/service/room.service'
+import { UserService } from 'src/app/service/user.service'
 
 @Component({
   selector: 'app-tablegame',
@@ -14,17 +14,20 @@ import { RoomService } from 'src/app/service/room.service'
 })
 export class TablegameComponent implements OnInit, OnDestroy {
 
+
   username: string = sessionStorage.getItem('username')
-  messageMapping: string = '/app/room1'
+  topic: string = '/app/'
+  @Input() messageMapping: string
 
   usersInRoom: number = 0
 
   constructor(public _webSocketService: WebsocketService,
-              private _roomService: RoomService,
-              private _router: Router) { }
+              private _router: Router,
+              private _userService: UserService) {
+  }
 
   ngOnInit(): void {
-    this.connect()
+    console.log(this.messageMapping)
   }
 
   ngOnDestroy(): void {
@@ -32,94 +35,76 @@ export class TablegameComponent implements OnInit, OnDestroy {
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
-     // this.disconnect()
-   $event.returnValue = true
-  }
-
-
-  decreaseAmountOfPeople(id: number) {
-    this._roomService.getRoomById(id).subscribe(
-        data => {
-             var amountOfPeople = data['amountOfPeople'] - 1;
-             const body = {id: id, name: 'room1', amountOfPeople: amountOfPeople };
-             this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe()
-        });
-  }
-
-  increaseAmountOfPeopleInRoomByID(id: number) {
-    this._roomService.getRoomById(id).subscribe(
-        data => {
-             var amountOfPeople = data['amountOfPeople'] + 1;
-             const body = {id: id, name: 'room1', amountOfPeople: amountOfPeople };
-             this._roomService.updateAmountOfPeopleInRoomByID(body).subscribe()
-        });
-  }
-
-  navigateToLobby() {
-    this._roomService.navigateToLobby();
-  }
-
-  connect() {
-    this.increaseAmountOfPeopleInRoomByID(1)
-    this._webSocketService.connect()
+    this.disconnect()
   }
 
   disconnect() {
-    this.decreaseAmountOfPeople(1)
     this._webSocketService.disconnect()
   }
 
   markOClick() {
-    this._webSocketService.markOClick(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.markOClick(finalTopic)
   }
 
   markXClick() {
-    this._webSocketService.markXClick(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.markXClick(finalTopic)
   }
 
-
   button1Click(): void {
-    this._webSocketService.button1Click(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.button1Click(finalTopic)
   }
 
   button2Click() {
-    this._webSocketService.button2Click(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.button2Click(finalTopic)
   }
 
   button3Click() {
-    this._webSocketService.button3Click(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.button3Click(finalTopic)
   }
 
   button4Click() {
-    this._webSocketService.button4Click(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.button4Click(finalTopic)
   }
 
   button5Click() {
-    this._webSocketService.button5Click(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.button5Click(finalTopic)
   }
 
   button6Click() {
-    this._webSocketService.button6Click(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.button6Click(finalTopic)
   }
 
   button7Click() {
-    this._webSocketService.button7Click(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.button7Click(finalTopic)
   }
 
   button8Click() {
-    this._webSocketService.button8Click(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.button8Click(finalTopic)
   }
 
   button9Click() {
-    this._webSocketService.button9Click(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.button9Click(finalTopic)
   }
 
   checkIfGameIsOver() {
-    this._webSocketService.checkIfGameIsOver(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.checkIfGameIsOver(finalTopic)
   }
 
   restartGame() {
-    this._webSocketService.restartGame(this.messageMapping)
+    const finalTopic = this.topic.concat(this.messageMapping)
+    this._webSocketService.restartGame(finalTopic)
   }
 
   setValuesAfterRestart() {

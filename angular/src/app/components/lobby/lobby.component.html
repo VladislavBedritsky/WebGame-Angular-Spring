@@ -8,7 +8,7 @@
       <h3>Players</h3>
       <table class="mt-2" style="border: 1px solid green;" >
         <tbody>
-        <tr *ngFor="let u of users"  (click)="q1(u.username)"
+        <tr *ngFor="let u of users"  (click)="connectToUser(u.username)"
             style="border: 1px solid blue;height: 50px;display: flex;align-items: center;">
           <button class="btn btn-default" type="submit" style="border: 1px solid blue;">
             <td>{{ u.username }}</td>
@@ -17,14 +17,11 @@
       </table>
     </div>
     <div class="col-8" style="border: 1px solid red;">
-      <h4>{{selectedU}}</h4>
+
+      <app-tablegame [hidden]="!isPlayerPicked" [messageMapping]="messageMapping"></app-tablegame>
+
     </div>
   </div>
 </div>
 
 
-<div class="form-group" [hidden]="true">
-  <label >Room1:</label>
-  <button [disabled]="isRoom1Full" (click)="joinRoom1()" class="btn btn-default" type="submit">Join</button>
-  <label>{{amountOfPeopleInRoom1}}/2</label>
-</div>

@@ -1,5 +1,5 @@
 
-<label class="form-group">Hello, {{username}}. Please make your choice:</label>
+<label class="form-group">Please make your choice:</label>
 <button (click)="markXClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">X</button>
 <button (click)="markOClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">O</button>
 <label *ngIf="_webSocketService.userChoiceIsX" class="form-group">Your mark is - X</label>
@@ -10,14 +10,8 @@
 
 <div class="col-md-6">
   <form class="form-inline">
-    <div class="form-group">
-      <label >WebSocket connection:</label>
-      <button (click)="connect()" class="btn btn-default" type="submit">Connect</button>
-      <button (click)="disconnect()" class="btn btn-default" type="submit" disabled="disabled">Disconnect</button>
-    </div>
     <div>
       <button [disabled]="!_webSocketService.isGameOver" (click)="restartGame()" class="btn btn-default" type="submit">Restart</button>
-      <button (click)="navigateToLobby()" class="btn btn-default" type="submit">Go to Lobby</button>
     </div>
   </form>
 </div>
