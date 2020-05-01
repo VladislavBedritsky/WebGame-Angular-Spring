@@ -1,6 +1,6 @@
 
 <h2>Hello, {{ username }}</h2>
-<div class="form-group">
+<div class="form-group" [hidden]="true">
   <label >Room1:</label>
   <button [disabled]="isRoom1Full" (click)="joinRoom1()" class="btn btn-default" type="submit">Join</button>
   <label>{{amountOfPeopleInRoom1}}/2</label>

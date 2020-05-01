@@ -32,14 +32,27 @@
   background-color: #e6e6e6;
 }
 
-#registration a {
+#changeForm1 a,
+ #changeForm2 a {
+  margin-top: 2px;
+  position: relative;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
   color: blue;
 }
 
-#signIn div {
+#changeForm1 a:hover,
+ #changeForm2 a:hover {
+  margin-top: 2px;
+  position: relative;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
   color: blue;
-  margin-left: 10px;
+  text-decoration: underline;
 }
+
 
 
 

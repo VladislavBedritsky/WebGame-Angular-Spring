@@ -55,12 +55,12 @@ export class UserService {
   }
 
   logOut() {
-    this.deleteUser().subscribe()
     sessionStorage.removeItem('username')
   }
 
-  navigateToGame() {
+  navigateToLobby() {
     this._router.navigate(['lobby']);
   }
+
 
 }
