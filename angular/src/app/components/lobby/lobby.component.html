@@ -1,27 +1,34 @@
-<app-navbar></app-navbar>
 
+<div id="#main">
+  <app-navbar></app-navbar>
 
+  <div id="content">
+    <div class="row">
+      <div class="col-4" id="colWithPlayers">
+        <form  class="mt-2">
+          <input type="text" class="form-control" placeholder="Search player" [(ngModel)]="searchPlayer" name="searchPlayer">
+        </form>
+        <div id="table">
+          <table class="mt-2">
+            <tbody>
+            <tr *ngFor="let u of users | playerFilter:searchPlayer"  (click)="connectToUser(u.username)">
+              <a type="submit" tabindex="1">
+                <td>
+                  <span>{{ u.username }}</span>
+                </td>
+              </a>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-<div>
-  <div class="row">
-    <div class="col-4" style="border: 1px solid red;">
-      <h3>Players</h3>
-      <table class="mt-2" style="border: 1px solid green;" >
-        <tbody>
-        <tr *ngFor="let u of users"  (click)="connectToUser(u.username)"
-            style="border: 1px solid blue;height: 50px;display: flex;align-items: center;">
-          <button class="btn btn-default" type="submit" style="border: 1px solid blue;">
-            <td>{{ u.username }}</td>
-          </button>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-8" style="border: 1px solid red;">
-
-      <app-tablegame [hidden]="!isPlayerPicked" [messageMapping]="messageMapping"></app-tablegame>
-
+      <div [hidden]="!isPlayerPicked" class="col-8" style="border: 1px solid red;">
+        <app-tablegame  [messageMapping]="messageMapping"></app-tablegame>
+      </div>
+      <div [hidden]="isPlayerPicked" class="col-8" style="
+      background-size: 100% 100%;
+      background-image: url(https://media.istockphoto.com/photos/tic-tac-toe-picture-id472034311);"> </div>
     </div>
   </div>
+
 </div>
-
-

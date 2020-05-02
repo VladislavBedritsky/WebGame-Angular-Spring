@@ -13,6 +13,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { LobbyComponent } from './components/lobby/lobby.component';
 import { CanDeactivateGuardService } from 'src/app/service/can-deactivate-guard.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PlayerFilterPipe } from './player-filter.pipe';
 
 const routes: Routes = [
     {path: 'main', component: MessageComponent },
@@ -30,7 +31,8 @@ const routes: Routes = [
     TablegameComponent,
     LogoutComponent,
     LobbyComponent,
-    NavbarComponent
+    NavbarComponent,
+    PlayerFilterPipe
   ],
   imports: [
     BrowserModule,

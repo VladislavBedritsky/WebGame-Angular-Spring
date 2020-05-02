@@ -1,82 +1,27 @@
 #navbar {
-    background-color: purple;
+    background-color: white;
+    border-bottom: 1px solid #EBEBEB;
+    font-weight:bold;
 }
 
 #navbar .navbar-brand {
     font-size: 20px;
-    color: white;
-}
-
-#navbar .navbar-toggler-icon {
-    background-color: white;
-}
-
-#navbar .navbar-toggler-icon:hover {
-    background-color: #00FFFF;
-}
-
-#navbar .navbar-brand:hover,
- #navbar .navbar-brand:focus {
-    font-size: 20px;
-    color: #00FFFF;
-    text-decoration:none;
-}
-
-#navbar .collapse a {
-    font-size: 20px;
-    color: white;
-}
-
-#navbar .collapse a:hover {
-    font-size: 20px;
-    color: #00FFFF;
-}
-
-#navbar .collapse .dropdown-menu,
-  #navbar .collapse .dropdown-menu > a
- {
-    background-color: black;
-}
-
-#navbar .collapse .nav-item:hover .dropdown-menu {
-
+    color: #36A4DF;
 }
 
 #navbar #button_login,
  #navbar #button_login1 {
-    background-color: purple;
+    background-color: white;
     border:0;
     outline: none;
 }
 
 #navbar .material-icons {
-    font-size: 2.0em;
-    color: white;
-    padding-top: 10px;
-}
-
-#navbar #button_login1 .material-icons {
-
+    font-size: 1.5em;
+    color: #838383;
+    padding-top:10px;
 }
 
 #navbar .material-icons:hover {
-    color: #00FFFF;
-}
-
-#navbar .modal .btn {
-    border: 0;
-    outline: none;
-}
-
-#navbar .modal a {
-    text-decoration: none;
-}
-
-#navbar .modal a:hover {
-    color: tomato;
-    text-decoration: none;
-}
-
-#navbar .navbar-link-q {
-    text-decoration: none;
+    color: #36A4DF;
 }

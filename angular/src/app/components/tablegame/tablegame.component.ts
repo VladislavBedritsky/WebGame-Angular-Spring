@@ -27,7 +27,6 @@ export class TablegameComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.messageMapping)
   }
 
   ngOnDestroy(): void {

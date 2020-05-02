@@ -17,6 +17,7 @@ export class LobbyComponent implements OnInit {
   users: string[] = []
   isPlayerPicked: boolean = false
   topic: string = '/topic/'
+  searchPlayer: string
 
   constructor(private _router: Router,
               public _webSocketService: WebsocketService,
