@@ -3,12 +3,13 @@
 }
 
 #XOcontainer {
-  margin-top: 50px;
-  width: 400px;
+  width: 50%;
+  margin-top: 10%;
+  margin-bottom: 10px;
 }
 
 #XOcontainer .row {
-  height: 50px
+  height: 75px
 }
 
 #XOcontainer button {
@@ -80,4 +81,13 @@
 }
 #b9:focus {
   outline: none;
+}
+
+.buttonIsX {
+  color: green;
+  font-size: 1.8em;
+}
+
+.buttonIs0 {
+  color: red;
 }

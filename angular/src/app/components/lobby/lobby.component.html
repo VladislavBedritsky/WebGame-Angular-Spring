@@ -1,5 +1,5 @@
 
-<div id="#main">
+<div id="main">
   <app-navbar></app-navbar>
 
   <div id="content">
@@ -22,12 +22,10 @@
         </div>
       </div>
 
-      <div [hidden]="!isPlayerPicked" class="col-8" style="border: 1px solid red;">
-        <app-tablegame  [messageMapping]="messageMapping"></app-tablegame>
+      <div id="tablegame" [hidden]="!isPlayerPicked" class="col-8">
+        <app-tablegame  [messageMapping]="messageMapping" [rivalPlayer]="rivalPlayer"></app-tablegame>
       </div>
-      <div [hidden]="isPlayerPicked" class="col-8" style="
-      background-size: 100% 100%;
-      background-image: url(https://media.istockphoto.com/photos/tic-tac-toe-picture-id472034311);"> </div>
+      <div id="background" [hidden]="isPlayerPicked" class="col-8"> </div>
     </div>
   </div>
 

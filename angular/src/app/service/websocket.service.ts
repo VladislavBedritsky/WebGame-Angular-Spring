@@ -27,10 +27,15 @@ export class WebsocketService {
   marksArePicked: boolean = false;
 
   isGameOver: boolean = false;
+  isDraw: boolean = false;
 
   stompClient: any;
   webSocketEndPoint: string = 'http://localhost:8080/websocket';
   message: Message;
+
+  userTurn: boolean = false;
+  hasPriorityTurn: boolean = false;
+  gameIsStarted: boolean = false;
 
   constructor(private _roomService: RoomService) {
   }
@@ -44,22 +49,58 @@ export class WebsocketService {
               this.message = JSON.parse(data.body)
               if (this.message.buttonName === 'b1' ) {
                 this.button1 = this.message.content
+                this.checkPlayersTurn();
+                this.checkIfIsDraw();
+                this.changePriorityAfterFirstGo()
+                this.checkIfGameIsStared(this.button1)
               } else if (this.message.buttonName === 'b2' ) {
                 this.button2 = this.message.content
+                this.checkPlayersTurn();
+                this.checkIfIsDraw();
+                this.changePriorityAfterFirstGo()
+                this.checkIfGameIsStared(this.button2)
               } else if (this.message.buttonName === 'b3' ) {
                 this.button3 = this.message.content
+                this.checkPlayersTurn();
+                this.checkIfIsDraw();
+                this.changePriorityAfterFirstGo()
+                this.checkIfGameIsStared(this.button3)
               } else if (this.message.buttonName === 'b4' ) {
                 this.button4 = this.message.content
+                this.checkPlayersTurn();
+                this.checkIfIsDraw();
+                this.changePriorityAfterFirstGo()
+                this.checkIfGameIsStared(this.button4)
               } else if (this.message.buttonName === 'b5' ) {
                 this.button5 = this.message.content
+                this.checkPlayersTurn();
+                this.checkIfIsDraw();
+                this.changePriorityAfterFirstGo()
+                this.checkIfGameIsStared(this.button5)
               } else if (this.message.buttonName === 'b6' ) {
                 this.button6 = this.message.content
+                this.checkPlayersTurn();
+                this.checkIfIsDraw();
+                this.changePriorityAfterFirstGo()
+                this.checkIfGameIsStared(this.button6)
               } else if (this.message.buttonName === 'b7' ) {
                 this.button7 = this.message.content
+                this.checkPlayersTurn();
+                this.checkIfIsDraw();
+                this.changePriorityAfterFirstGo()
+                this.checkIfGameIsStared(this.button7)
               } else if (this.message.buttonName === 'b8' ) {
                 this.button8 = this.message.content
+                this.checkPlayersTurn();
+                this.checkIfIsDraw();
+                this.changePriorityAfterFirstGo()
+                this.checkIfGameIsStared(this.button8)
               } else if (this.message.buttonName === 'b9' ) {
                 this.button9 = this.message.content
+                this.checkPlayersTurn();
+                this.checkIfIsDraw();
+                this.changePriorityAfterFirstGo()
+                this.checkIfGameIsStared(this.button9)
               } else if (this.message.buttonName === 'gameOver') {
                 this.victoryButton = this.message.content
                 this.isGameOver = true
@@ -70,12 +111,15 @@ export class WebsocketService {
                   this.userChoiceIsX = true;
                   this.marksArePicked = true;
                 }
+                this.checkIfHasPriority()
               } else if (this.message.buttonName === 'markXClick') {
                 if (!this.userChoiceIsX) {
                   this.userChoiceIs0 = true;
                   this.marksArePicked = true;
                 }
+                this.checkIfHasPriority()
               }
+
           });
       });
   }
@@ -284,6 +328,67 @@ export class WebsocketService {
       this.userChoiceIsX = false;
       this.marksArePicked = false;
       this.isGameOver = false;
+      this.isDraw = false;
+      this.userTurn = false;
+      this.hasPriorityTurn = false;
+      this.gameIsStarted = false;
+  }
+
+  checkIfIsDraw() {
+    if (this.button1 !== '1' && this.button2 !== '2' && this.button3 !== '3' &&
+        this.button4 !== '4' && this.button5 !== '5' && this.button6 !== '6' &&
+        this.button7 !== '7' && this.button8 !== '8' && this.button9 !== '9' &&
+        this.isGameOver === false) {
+
+      this.isDraw = true;
+
+        }
+  }
+
+  checkPlayersTurn() {
+    let buttons = [this.button1, this.button2, this.button3, this.button4, this.button5, this.button6, this.button7, this.button8, this.button9]
+    let amountX = 0;
+    let amountO = 0;
+
+    for (let i = 0; i < buttons.length; i++) {
+      if (buttons[i] === 'X') {
+        amountX++;
+      } else if (buttons[i] === '0') {
+        amountO++;
+      }
+    }
+
+    if(this.userChoiceIsX === true) {
+      if (amountX === amountO || amountX === 0) {
+        this.userTurn = false;
+      } else {
+        this.userTurn = true;
+      }
+    } else if (this.userChoiceIs0 === true) {
+      if (amountO === amountX ) {
+        this.userTurn = true;
+      } else {
+        this.userTurn = false;
+      }
+    }
+  }
+
+  checkIfHasPriority() {
+    if (this.userChoiceIsX === true) {
+      this.hasPriorityTurn = true
+    }
+  }
+
+  changePriorityAfterFirstGo() {
+    if (this.userChoiceIs0 === true) {
+      this.hasPriorityTurn = true
+    }
+  }
+
+  checkIfGameIsStared(button: string) {
+    if (button === '0' || button === 'X') {
+      this.gameIsStarted = true;
+    }
   }
 
 }

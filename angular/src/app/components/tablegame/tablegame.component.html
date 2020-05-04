@@ -1,53 +1,135 @@
 
-<label class="form-group">Please make your choice:</label>
-<button (click)="markXClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">X</button>
-<button (click)="markOClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">O</button>
-<label *ngIf="_webSocketService.userChoiceIsX" class="form-group">Your mark is - X</label>
-<label *ngIf="_webSocketService.userChoiceIs0" class="form-group">Your mark is - 0</label>
-<div class="container" *ngIf="_webSocketService.isGameOver">
-  Game Over... Winner is {{ _webSocketService.victoryButton }}
+<div class="mt-3 ml-5" style="position: absolute; left: 35%; top: 5%   ">
+  <div class="row">
+    <h2 class="mr-5" style="color: #36A4DF;">{{username}}</h2>
+    <h3>0 : 0</h3>
+    <h2 class="ml-5" style="color: #36A4DF">{{rivalPlayer}}</h2>
+  </div>
 </div>
 
-<div class="col-md-6">
-  <form class="form-inline">
-    <div>
-      <button [disabled]="!_webSocketService.isGameOver" (click)="restartGame()" class="btn btn-default" type="submit">Restart</button>
+<div class="row">
+
+  <div *ngIf="!_webSocketService.marksArePicked" style="width: 70%; padding-left: 5%; padding-top: 20px;">
+    <h6 class="form-group">Make your choice </h6>
+    <button (click)="markXClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">
+      <span class="material-icons buttonIsX">clear</span>
+    </button>
+    <button (click)="markOClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">
+      <span class="material-icons buttonIs0">panorama_fish_eye</span>
+    </button>
+  </div>
+
+  <div *ngIf="_webSocketService.marksArePicked" style="width: 70%; padding-left: 5%; padding-top: 20px;">
+    <div *ngIf="_webSocketService.userChoiceIsX">
+      <h6>
+        You are playing with
+        <span class="material-icons buttonIsX" style="vertical-align: -10px;">clear</span>
+      </h6>
     </div>
-  </form>
+    <div *ngIf="_webSocketService.userChoiceIs0">
+      <h6>
+        You are playing with
+        <span class="material-icons buttonIs0" style="vertical-align: -8px;">panorama_fish_eye</span>
+      </h6>
+    </div>
+  </div>
+
+  <div class="d-flex" style="width: 30%; position: relative">
+      <button [disabled]="(_webSocketService.isDraw || _webSocketService.isGameOver) ? false : true"
+              (click)="restartGame()" class="btn btn-default ml-auto" type="submit" style="position: absolute; left: 85%; top: 5%">
+        <span class="material-icons" >autorenew</span>
+      </button>
+  </div>
+
 </div>
+
+
 
 <div id="XOcontainer" class="container">
-  <div class="row">
-    <button (click)="button1Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b1">
-      {{_webSocketService.button1 === '1' ? '' : _webSocketService.button1}}
+
+  <div *ngIf="_webSocketService.marksArePicked" style="margin: auto; width: 40%; margin-top: 30px;">
+    <div *ngIf="_webSocketService.marksArePicked" style="text-align: center">
+      <h5 *ngIf="!_webSocketService.gameIsStarted">
+        First move
+        <span class="material-icons buttonIsX" style="vertical-align: -10px;">
+          clear
+        </span>
+      </h5>
+    </div>
+  </div>
+  <div *ngIf="_webSocketService.isGameOver" style="margin: auto; width: 60%; text-align: center">
+    <h5>Game Over... Winner is
+      <span *ngIf="(_webSocketService.victoryButton === 'X') ? true : false " class="material-icons buttonIsX" style="vertical-align: -10px;">
+          clear
+      </span>
+      <span *ngIf="(_webSocketService.victoryButton === '0') ? true : false " class="material-icons buttonIs0" style="vertical-align: -10px;">
+          panorama_fish_eye
+      </span>
+    </h5>
+  </div>
+  <div *ngIf="_webSocketService.isDraw" style="margin: auto; width: 40%; text-align: center">
+    <h5>Draw</h5>
+  </div>
+
+  <div class="row" style="margin-top: 50px;">
+    <button (click)="button1Click()"
+            [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver || _webSocketService.userTurn || !_webSocketService.hasPriorityTurn"
+            class="col" id="b1">
+      <span class="material-icons buttonIsX" *ngIf="(_webSocketService.button1 === 'X') ? true : false">clear</span>
+      <span class="material-icons buttonIs0" *ngIf="(_webSocketService.button1 === '0') ? true : false">panorama_fish_eye</span>
     </button>
-    <button (click)="button2Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b2">
-      {{_webSocketService.button2 === '2' ? '' : _webSocketService.button2}}
+    <button (click)="button2Click()"
+            [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver || _webSocketService.userTurn || !_webSocketService.hasPriorityTurn"
+            class="col" id="b2">
+      <span class="material-icons buttonIsX" *ngIf="(_webSocketService.button2 === 'X') ? true : false">clear</span>
+      <span class="material-icons buttonIs0" *ngIf="(_webSocketService.button2 === '0') ? true : false">panorama_fish_eye</span>
     </button>
-    <button (click)="button3Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b3">
-      {{_webSocketService.button3 === '3' ? '' : _webSocketService.button3}}
+    <button (click)="button3Click()"
+            [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver || _webSocketService.userTurn || !_webSocketService.hasPriorityTurn"
+            class="col" id="b3">
+      <span class="material-icons buttonIsX" *ngIf="(_webSocketService.button3 === 'X') ? true : false">clear</span>
+      <span class="material-icons buttonIs0" *ngIf="(_webSocketService.button3 === '0') ? true : false">panorama_fish_eye</span>
     </button>
   </div>
   <div class="row">
-    <button (click)="button4Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b4">
-      {{_webSocketService.button4 === '4' ? '' : _webSocketService.button4}}
+    <button (click)="button4Click()"
+            [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver || _webSocketService.userTurn || !_webSocketService.hasPriorityTurn"
+            class="col" id="b4">
+      <span class="material-icons buttonIsX" *ngIf="(_webSocketService.button4 === 'X') ? true : false">clear</span>
+      <span class="material-icons buttonIs0" *ngIf="(_webSocketService.button4 === '0') ? true : false">panorama_fish_eye</span>
     </button>
-    <button (click)="button5Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b5">
-      {{_webSocketService.button5 === '5' ? '' : _webSocketService.button5}}
+    <button (click)="button5Click()"
+            [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver || _webSocketService.userTurn || !_webSocketService.hasPriorityTurn"
+            class="col" id="b5">
+      <span class="material-icons buttonIsX" *ngIf="(_webSocketService.button5 === 'X') ? true : false">clear</span>
+      <span class="material-icons buttonIs0" *ngIf="(_webSocketService.button5 === '0') ? true : false">panorama_fish_eye</span>
     </button>
-    <button (click)="button6Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b6">
-      {{_webSocketService.button6 === '6' ? '' : _webSocketService.button6}}
+    <button (click)="button6Click()"
+            [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver || _webSocketService.userTurn || !_webSocketService.hasPriorityTurn"
+            class="col" id="b6">
+      <span class="material-icons buttonIsX" *ngIf="(_webSocketService.button6 === 'X') ? true : false">clear</span>
+      <span class="material-icons buttonIs0" *ngIf="(_webSocketService.button6 === '0') ? true : false">panorama_fish_eye</span>
     </button>
   </div>
   <div class="row">
-    <button (click)="button7Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b7">
-      {{_webSocketService.button7 === '7' ? '' : _webSocketService.button7}}
+    <button (click)="button7Click()"
+            [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver || _webSocketService.userTurn || !_webSocketService.hasPriorityTurn"
+            class="col" id="b7">
+      <span class="material-icons buttonIsX" *ngIf="(_webSocketService.button7 === 'X') ? true : false">clear</span>
+      <span class="material-icons buttonIs0" *ngIf="(_webSocketService.button7 === '0') ? true : false">panorama_fish_eye</span>
     </button>
-    <button (click)="button8Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b8">
-      {{_webSocketService.button8 === '8' ? '' : _webSocketService.button8}}
+    <button (click)="button8Click()"
+            [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver || _webSocketService.userTurn || !_webSocketService.hasPriorityTurn"
+            class="col" id="b8">
+      <span class="material-icons buttonIsX" *ngIf="(_webSocketService.button8 === 'X') ? true : false">clear</span>
+      <span class="material-icons buttonIs0" *ngIf="(_webSocketService.button8 === '0') ? true : false">panorama_fish_eye</span>
     </button>
-    <button (click)="button9Click()" [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver" class="col" id="b9">
-      {{_webSocketService.button9 === '9' ? '' : _webSocketService.button9}}
+    <button (click)="button9Click()"
+            [disabled]="!_webSocketService.marksArePicked || _webSocketService.isGameOver || _webSocketService.userTurn || !_webSocketService.hasPriorityTurn"
+            class="col" id="b9">
+      <span class="material-icons buttonIsX" *ngIf="(_webSocketService.button9 === 'X') ? true : false">clear</span>
+      <span class="material-icons buttonIs0" *ngIf="(_webSocketService.button9 === '0') ? true : false">panorama_fish_eye</span>
     </button>
   </div>
 </div>
+

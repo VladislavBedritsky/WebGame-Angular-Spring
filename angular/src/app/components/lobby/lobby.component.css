@@ -63,4 +63,11 @@
 
 }
 
+#tablegame {
+}
 
+#background {
+  background-size: 100% 100%;
+  background-image: url(https://st.depositphotos.com/1116329/2301/v/450/depositphotos_23015366-stock-illustration-vector-light-circle-icon-eps10.jpg);
+  box-shadow: 0 0 25px 34px #ffffff inset;
+}

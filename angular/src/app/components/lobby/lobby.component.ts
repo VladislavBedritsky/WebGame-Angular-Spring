@@ -18,6 +18,7 @@ export class LobbyComponent implements OnInit {
   isPlayerPicked: boolean = false
   topic: string = '/topic/'
   searchPlayer: string
+  rivalPlayer: string
 
   constructor(private _router: Router,
               public _webSocketService: WebsocketService,
@@ -43,7 +44,7 @@ export class LobbyComponent implements OnInit {
     const finalTopic = this.topic.concat(this.messageMapping);
     this.isPlayerPicked = true
     this._webSocketService.connect(finalTopic)
-
+    this.rivalPlayer = usernameFromUI;
   }
 
   getUsers() {

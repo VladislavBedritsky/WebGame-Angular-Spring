@@ -18,6 +18,7 @@ export class TablegameComponent implements OnInit, OnDestroy {
   username: string = sessionStorage.getItem('username')
   topic: string = '/app/'
   @Input() messageMapping: string
+  @Input() rivalPlayer: string
 
   usersInRoom: number = 0
 
@@ -109,7 +110,5 @@ export class TablegameComponent implements OnInit, OnDestroy {
   setValuesAfterRestart() {
     this._webSocketService.setValuesAfterRestart()
   }
-
-
 
 }
