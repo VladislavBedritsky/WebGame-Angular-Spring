@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private baseUrl = "http://localhost:8080/registration"
-  private getUserByUsernameUrl = "http://localhost:8080/getUserBy"
-  private deleteUserByUsernameUrl = "http://localhost:8080/deleteUserBy"
-  private userAuthenticationUrl = "http://localhost:8080/user"
-  private getAllUsers = "http://localhost:8080/users"
+  private baseUrl = "http://35.239.53.104:8087/web-1.01/registration"
+  private getUserByUsernameUrl = "http://35.239.53.104:8087/web-1.01/getUserBy"
+  private deleteUserByUsernameUrl = "http://35.239.53.104:8087/web-1.01/deleteUserBy"
+  private userAuthenticationUrl = "http://35.239.53.104:8087/web-1.01/user"
+  private getAllUsers = "http://35.239.53.104:8087/web-1.01/users"
 
   constructor(private _httpClient: HttpClient,
               private _router: Router) { }

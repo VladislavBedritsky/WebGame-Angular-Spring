@@ -30,7 +30,7 @@ export class WebsocketService {
   isDraw: boolean = false;
 
   stompClient: any;
-  webSocketEndPoint: string = 'http://localhost:8080/websocket';
+  webSocketEndPoint: string = 'http://35.239.53.104:8087/web-1.01/websocket';
   message: Message;
 
   userTurn: boolean = false;

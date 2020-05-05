@@ -16,7 +16,7 @@ export class MessageComponent implements OnInit {
   userName: string = null;
   password: string = null;
 
-  webSocketEndPoint: string = 'http://localhost:8080/websocket';
+  webSocketEndPoint: string = 'http://35.239.53.104:8087/web-1.01/websocket';
   topic: string = '/topic/activity';
   stompClient: any;
 

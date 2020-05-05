@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class RoomService {
 
-  private getRoom = 'http://localhost:8080/room'
+  private getRoom = 'http://35.239.53.104:8087/web-1.01/room'
 
   constructor(private _router: Router,
               private _httpClient: HttpClient) { }
