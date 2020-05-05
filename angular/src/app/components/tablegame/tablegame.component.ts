@@ -107,8 +107,6 @@ export class TablegameComponent implements OnInit, OnDestroy {
     this._webSocketService.restartGame(finalTopic)
   }
 
-  setValuesAfterRestart() {
-    this._webSocketService.setValuesAfterRestart()
-  }
+
 
 }

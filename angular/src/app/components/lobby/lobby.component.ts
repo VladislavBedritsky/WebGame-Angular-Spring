@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Compiler} from '@angular/core';
 import { Router, RouterEvent, NavigationEnd  } from '@angular/router';
 
 import { WebsocketService } from 'src/app/service/websocket.service'
@@ -33,7 +33,12 @@ export class LobbyComponent implements OnInit {
   }
 
   connectToUser(usernameFromUI: any) {
-    this._webSocketService.setValuesAfterRestart()
+
+    if (this.isPlayerPicked === true) {
+        this._webSocketService.setValuesAfterChangePlayerPick()
+        this._webSocketService.disconnect()
+    }
+
 
     if(this.username.localeCompare(usernameFromUI) === -1) {
       this.messageMapping = this.username.concat(usernameFromUI)

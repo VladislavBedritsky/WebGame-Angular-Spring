@@ -37,6 +37,9 @@ export class WebsocketService {
   hasPriorityTurn: boolean = false;
   gameIsStarted: boolean = false;
 
+  playerVictories = 0;
+  rivalVictories = 0;
+
   constructor(private _roomService: RoomService) {
   }
 
@@ -104,6 +107,7 @@ export class WebsocketService {
               } else if (this.message.buttonName === 'gameOver') {
                 this.victoryButton = this.message.content
                 this.isGameOver = true
+                this.checkAmountOfVictories()
               } else if (this.message.buttonName === 'restartGame') {
                  this.setValuesAfterRestart()
               } else if (this.message.buttonName === 'markOClick') {
@@ -334,6 +338,31 @@ export class WebsocketService {
       this.gameIsStarted = false;
   }
 
+  setValuesAfterChangePlayerPick() {
+      this.button1 = "1"
+      this.button2 = "2"
+      this.button3 = "3"
+      this.button4 = "4"
+      this.button5 = "5"
+      this.button6 = "6"
+      this.button7 = "7"
+      this.button8 = "8"
+      this.button9 = "9"
+      this.victoryButton = ""
+
+      this.userChoiceIs0 = false;
+      this.userChoiceIsX = false;
+      this.marksArePicked = false;
+      this.isGameOver = false;
+      this.isDraw = false;
+      this.userTurn = false;
+      this.hasPriorityTurn = false;
+      this.gameIsStarted = false;
+
+      this.playerVictories = 0;
+      this.rivalVictories = 0;
+  }
+
   checkIfIsDraw() {
     if (this.button1 !== '1' && this.button2 !== '2' && this.button3 !== '3' &&
         this.button4 !== '4' && this.button5 !== '5' && this.button6 !== '6' &&
@@ -388,6 +417,16 @@ export class WebsocketService {
   checkIfGameIsStared(button: string) {
     if (button === '0' || button === 'X') {
       this.gameIsStarted = true;
+    }
+  }
+
+  checkAmountOfVictories() {
+    if(this.victoryButton === '0' && this.userChoiceIs0 === true) {
+      ++this.playerVictories;
+    } else if (this.victoryButton === 'X' && this.userChoiceIsX === true) {
+      ++this.playerVictories;
+    } else {
+      ++this.rivalVictories;
     }
   }
 

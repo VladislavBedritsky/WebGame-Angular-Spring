@@ -1,10 +1,62 @@
+
+#draw, #gameOver {
+  position: absolute;
+  top:20%;
+  left:20%;
+  width: 60%;
+  text-align: center;
+}
+
+#firstMove div {
+  text-align: center;
+}
+
+#firstMove {
+  position: absolute;
+  top:20%;
+  left:20%;
+  width: 60%;
+}
+
+#score h2 {
+  color: #36A4DF;
+}
+
+#score {
+  position: absolute;
+  left: 39%;
+  top: 8%
+}
+
+#restart {
+  width: 30%;
+  position: absolute;
+  top: 20px;
+  left: 92%;
+}
+
+.vertical-align-O {
+  vertical-align: -8px;
+}
+
+.vertical-align-X {
+  vertical-align: -10px;
+}
+
+.choice {
+  position: absolute;
+  width: 50%;
+  top: 20px;
+  left: 20px;
+}
+
 .btn:focus {
   outline: none;
 }
 
 #XOcontainer {
   width: 50%;
-  margin-top: 10%;
+  margin-top: 25%;
   margin-bottom: 10px;
 }
 
