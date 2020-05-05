@@ -20,7 +20,7 @@ pipeline {
             }
             post {
                 always {
-                    junit '**/surefire-reports/*.xml'
+                    junit allowEmptyResults: true, testResults: '**/surefire-reports/*.xml'
                     recordIssues(tools: [checkStyle(), pmdParser(), spotBugs(useRankAsPriority: true)])
                 }
                 failure {
