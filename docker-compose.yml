@@ -1,14 +1,14 @@
 version: "3.3"
 services:
 
-  angular:
+  angularweb:
     build:
       context: ./angular/
       dockerfile: Dockerfile
-    image: angular
+    image: angularweb
     ports:
       - 4201:4200
-    container_name: angular
+    container_name: angularweb
     networks:
       - net
     restart: on-failure
