@@ -1,0 +1,19 @@
+version: "3.3"
+services:
+
+  angular:
+    build:
+      context: ./angular/
+      dockerfile: Dockerfile
+    image: angular
+    ports:
+      - 4200:4200
+    container_name: angular
+    networks:
+      - net
+    restart: on-failure
+    command: ng serve --host 0.0.0.0 --port 4200
+
+networks:
+  net:
+    driver: bridge
