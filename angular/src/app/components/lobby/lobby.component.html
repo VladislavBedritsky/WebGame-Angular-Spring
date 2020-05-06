@@ -4,8 +4,8 @@
 
   <div id="content">
     <div class="row">
-      <div class="col-4" id="colWithPlayers">
-        <form  class="mt-2">
+      <div id="colWithPlayers">
+        <form  class="mt-2 pr-3">
           <input type="text" class="form-control" placeholder="Search player" [(ngModel)]="searchPlayer" name="searchPlayer">
         </form>
         <div id="table">
@@ -22,10 +22,10 @@
         </div>
       </div>
 
-      <div id="tablegame" [hidden]="!isPlayerPicked" class="col-8" style="box-shadow: 0px 0px 21px 3px #c7bfc7 inset;">
+      <div id="tablegame" [hidden]="!isPlayerPicked">
         <app-tablegame  [messageMapping]="messageMapping" [rivalPlayer]="rivalPlayer"></app-tablegame>
       </div>
-      <div id="background" [hidden]="isPlayerPicked" class="col-8"> </div>
+      <div id="background" [hidden]="isPlayerPicked"> </div>
     </div>
   </div>
 

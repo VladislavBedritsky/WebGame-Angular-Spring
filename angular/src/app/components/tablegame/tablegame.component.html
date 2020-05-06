@@ -1,13 +1,15 @@
-
-  <div>
+<div id="main" class="container">
+  <div class="row">
     <div class="choice" *ngIf="!_webSocketService.marksArePicked">
-      <h6 class="form-group">Make your choice </h6>
-      <button (click)="markXClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">
-        <span class="material-icons buttonIsX">clear</span>
-      </button>
-      <button (click)="markOClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">
-        <span class="material-icons buttonIs0">panorama_fish_eye</span>
-      </button>
+      <div class="row">
+        <span>Make your choice </span>
+        <button (click)="markXClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">
+          <span class="material-icons buttonIsX">clear</span>
+        </button>
+        <button (click)="markOClick()" [disabled]="_webSocketService.marksArePicked" class="btn btn-default" type="submit">
+          <span class="material-icons buttonIs0">panorama_fish_eye</span>
+        </button>
+      </div>
     </div>
 
     <div class="choice" *ngIf="_webSocketService.marksArePicked">
@@ -34,15 +36,25 @@
 
   </div>
 
-  <div id="score">
+  <div class="container" id="score">
     <div class="row">
-      <h2 class="mr-3">{{username}}</h2>
-      <h3>{{_webSocketService.playerVictories}} : {{_webSocketService.rivalVictories}}</h3>
-      <h2 class="ml-3">{{rivalPlayer}}</h2>
+      <span>{{_webSocketService.playerVictories}} : {{_webSocketService.rivalVictories}}</span>
     </div>
   </div>
 
-  <div id="firstMove" *ngIf="_webSocketService.marksArePicked">
+  <div class="container" id="username">
+    <div class="row">
+      <span>{{username}}</span>
+    </div>
+  </div>
+
+  <div class="container" id="rivalPlayer">
+    <div class="row">
+      <span>{{rivalPlayer}}</span>
+    </div>
+  </div>
+
+  <div class="container" id="firstMove" *ngIf="_webSocketService.marksArePicked">
     <div *ngIf="_webSocketService.marksArePicked">
       <h5 *ngIf="!_webSocketService.gameIsStarted">
         First move
@@ -52,6 +64,7 @@
       </h5>
     </div>
   </div>
+
   <div id="gameOver" *ngIf="_webSocketService.isGameOver">
     <h5>Game Over... Winner is
       <span *ngIf="(_webSocketService.victoryButton === 'X') ? true : false " class="material-icons buttonIsX vertical-align-X">
@@ -62,6 +75,7 @@
       </span>
     </h5>
   </div>
+
   <div id="draw" *ngIf="_webSocketService.isDraw">
     <h5>Draw</h5>
   </div>
@@ -128,4 +142,4 @@
       </button>
     </div>
   </div>
-
+</div>
