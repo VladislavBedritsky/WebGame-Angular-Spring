@@ -1,8 +1,10 @@
-## Multiplayer WebGame
+## Multiplayer WebGame X&O
 
 ### App in progress...
 
-Technologies:
+* Spring-app: 
+            
+            http://35.239.53.104:8087/web-1.01/
+* Angular-app: 
 
-* Spring
-* Angular
+            http://35.239.53.104:4201/
