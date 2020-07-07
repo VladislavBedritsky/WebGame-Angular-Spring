@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+        PROJECT_VERSION = '1.01'
+        ARTIFACTORY_USERNAME = 'admin'
+        ARTIFACTORY_PASSWORD = 'password123'
+    }
     stages {
         stage ('SNAPSHOT') {
             steps {
@@ -35,8 +40,9 @@ pipeline {
             steps {
                 script {
 
-                    def ret = sh(script: 'curl -u admin:password123  -s -o /dev/null -w "%{http_code}" http://35.239.53.104:8081/artifactory/api/storage/libs-release-local/org/example/webgame/1.01/webgame-1.01.pom', returnStdout: true)
-                    if (ret == "200") {
+                    def response = sh(script: 'curl -u ${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD}  -s -o /dev/null -w "%{http_code}" ' +
+                            'https://artifactory.xfarm.xyz/artifactory/api/storage/libs-release/org/example/web/${PROJECT_VERSION}/web-${PROJECT_VERSION}.war', returnStdout: true)
+                    if (response == "200") {
                         currentBuild.result = 'FAILURE'
                         error "release failed"
                     }
@@ -50,6 +56,7 @@ pipeline {
                     rtMaven.deployer server: artServer, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
 
                     artServer.publishBuildInfo buildInfo
+                    rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.war")
                     rtMaven.deployer.deployArtifacts buildInfo
                 }
             }
@@ -66,10 +73,12 @@ pipeline {
             steps {
                 script {
                     sh 'mvn clean install -Dmaven.test.skip=true -Dliquibase.should.run=false'
-                    deploy adapters: [tomcat8(credentialsId: 'cd34afab-d0bd-4e08-949e-d2f2ebf703ef', path: '', url: 'http://tomcat:8080')], contextPath: null, war: 'web/target/*.war'
-                    sh 'sleep 5'
 
-                    def statusWebApp = sh(script: 'curl -s -o /dev/null -w "%{http_code}" http://35.239.53.104:8087/web-1.01/', returnStdout: true)
+                    sh 'mv web/target/web-${PROJECT_VERSION}.war web/target/tic-tac-toe.war'
+
+                    deploy adapters: [tomcat8(credentialsId: 'cd34afab-d0bd-4e08-949e-d2f2ebf703ef', path: '', url: 'http://tomcat:8080')], contextPath: null, war: 'web/target/*.war'
+
+                    def statusWebApp = sh(script: 'curl -s -o /dev/null -w "%{http_code}" http://35.239.53.104:8087/tic-tac-toe/', returnStdout: true)
                     if (statusWebApp != "302") {
                         currentBuild.result = 'FAILURE'
                         error "deploy failed"
