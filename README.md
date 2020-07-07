@@ -1,10 +1,11 @@
-## Multiplayer WebGame X&O
+## Multiplayer WebGame Tic-Tac-Toe
 
 ### App in progress...
 
+##
 * Spring-app: 
             
-   http://35.239.53.104:8087/web-1.01/
+   https://tomcat.xfarm.xyz/tic-tac-toe/
 * Angular-app: 
 
-   http://35.239.53.104:4201/
+   https://xo.xfarm.xyz/
