@@ -15,7 +15,7 @@ services:
     command: ng serve --host 0.0.0.0 --port 4200 --disable-host-check
 
   nginx-do:
-    image: nginx:1.19
+    image: vladquinn/nginx-do:latest
     container_name: nginx-do
     ports:
       - 80:80
@@ -23,6 +23,8 @@ services:
     networks:
       - net
     restart: on-failure
+    depends_on:
+      - angularweb
 
 networks:
   net:
