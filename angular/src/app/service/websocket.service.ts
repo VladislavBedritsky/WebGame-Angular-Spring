@@ -30,7 +30,7 @@ export class WebsocketService {
   isDraw: boolean = false;
 
   stompClient: any;
-  webSocketEndPoint: string = 'http://35.239.53.104:8087/web-1.01/websocket';
+  webSocketEndPoint: string = 'https://tomcat.xfarm.xyz/tic-tac-toe/websocket';
   message: Message;
 
   userTurn: boolean = false;
