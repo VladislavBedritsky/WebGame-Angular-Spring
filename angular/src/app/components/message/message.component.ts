@@ -16,7 +16,7 @@ export class MessageComponent implements OnInit {
   userName: string = null;
   password: string = null;
 
-  webSocketEndPoint: string = 'https://tomcat.xfarm.xyz/tic-tac-toe/websocket';
+  webSocketEndPoint: string = 'http://35.239.53.104:8087/tic-tac-toe/websocket';
   topic: string = '/topic/activity';
   stompClient: any;
 
