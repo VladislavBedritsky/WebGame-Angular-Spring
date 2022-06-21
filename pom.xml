@@ -29,7 +29,7 @@
         <jackson-databind.version>2.10.1</jackson-databind.version>
         <io.projectreactor.netty.reactor-netty.version>0.9.6.RELEASE</io.projectreactor.netty.reactor-netty.version>
         <liquibase-maven-plugin.version>3.4.1</liquibase-maven-plugin.version>
-        <mysql-connector-java.version>8.0.18</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
         <spring.security.version>4.2.0.RELEASE</spring.security.version>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
